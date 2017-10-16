@@ -1,5 +1,5 @@
 class Decoder
-  attr_accessor :bin_rep_length, :from_bin, :to_bin
+  attr_accessor :from_bin, :to_bin
 
   def initialize(bin_rep_length, values_table)
     @bin_rep_length = bin_rep_length
