@@ -19,8 +19,6 @@ require_relative 'challenge-3'
 
 hex_string = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 
-potential_hex_strings = translations(hex_string)
-
-p top_translation(potential_hex_strings)
+p find_top_translation(hex_string)
 
 # => "Cooking MCs like a pound of bacon"
