@@ -13,23 +13,26 @@ def find_cyphers(hex_string)
 end
 
 def find_xor(hex_pair)
-  binary_blankspace = '00100000'
+  binary_for_blankspace = '00100000'
   binary_of_hex_pair = HEX.to_bin(hex_pair)
-  xor(binary_blankspace, binary_of_hex_pair)
+  xor(binary_for_blankspace, binary_of_hex_pair)
 end
 
 def hex_to_ascii(hex_string)
   hex_string.gsub(/../, HEX_TO_TEXT)
 end
 
-def top_translation(hex_str_collection)
-  translations = hex_str_collection.map{|hex_str| hex_to_ascii(hex_str)}
-  translations.sort_by!{|translation| score_translation(translation)}
-  translations.last
+def rank_translations(translations)
+  translations.sort_by{|translation| score_translation(translation)}
 end
 
 def score_translation(str)
   str.count('ETAOIN SHRDLU')
+end
+
+def top_translation(hex_str_collection)
+  translations = hex_str_collection.map{|hex_str| hex_to_ascii(hex_str)}
+  rank_translations(translations).last
 end
 
 def translations(hex_string)
@@ -44,5 +47,6 @@ def xor_cypher(cypher, bin_string)
   binary_sets.map!{|set| xor(set, cypher)}
   binary_sets.join
 end
+
 
 HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']]).to_h
