@@ -12,6 +12,11 @@ def find_cyphers(hex_string)
   pairings.keys.map{|key| find_xor(key)}
 end
 
+def find_top_translation(hex_string)
+  potential_hex_strings = translations(hex_string)
+  top_translation(potential_hex_strings)
+end
+
 def find_xor(hex_pair)
   binary_for_blankspace = '00100000'
   binary_of_hex_pair = HEX.to_bin(hex_pair)
@@ -27,7 +32,7 @@ def rank_translations(translations)
 end
 
 def score_translation(str)
-  str.count('ETAOIN SHRDLU')
+  str.count('ETAOIN SHRDLUetaoinshrdlu')
 end
 
 def top_translation(hex_str_collection)
