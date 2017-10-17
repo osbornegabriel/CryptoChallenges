@@ -7,10 +7,36 @@ def count_values(scan_size, string)
   value_count.sort_by{|key, value| value}.to_h
 end
 
+def find_cyphers(hex_string)
+  pairings = count_values(2, hex_string)
+  pairings.keys.map{|key| find_xor(key)}
+end
+
 def find_xor(hex_pair)
   binary_blankspace = '00100000'
   binary_of_hex_pair = HEX.to_bin(hex_pair)
   xor(binary_blankspace, binary_of_hex_pair)
+end
+
+def hex_to_ascii(hex_string)
+  hex_string.gsub(/../, HEX_TO_TEXT)
+end
+
+def top_translation(hex_str_collection)
+  translations = hex_str_collection.map{|hex_str| hex_to_ascii(hex_str)}
+  translations.sort_by!{|translation| score_translation(translation)}
+  translations.last
+end
+
+def score_translation(str)
+  str.count('ETAOIN SHRDLU')
+end
+
+def translations(hex_string)
+  bin_string = HEX.to_bin(hex_string)
+  cyphers = find_cyphers(hex_string)
+  new_bin_strings = cyphers.map{|cypher| xor_cypher(cypher, bin_string)}
+  new_bin_strings.map{|string| HEX.from_bin(string)}
 end
 
 def xor_cypher(cypher, bin_string)
@@ -18,32 +44,5 @@ def xor_cypher(cypher, bin_string)
   binary_sets.map!{|set| xor(set, cypher)}
   binary_sets.join
 end
-
-def top_three_translations(hex_str_collection)
-
-end
-
-def find_cyphers(hex_string)
-  pairings = count_values(2, hex_string)
-  keys = pairings.keys.map{|key| find_xor(key)}
-end
-
-# p bin_string = HEX.to_bin(hex_string)
-
-# p pairings = count_values(2, hex_string)
-# p keys = pairings.keys
-# cyphers = keys.map do |key|
-#   cypher = find_xor(key)
-# end
-
-#  new_bin_strings = []
-#   cyphers.each{|cypher| new_bin_strings << xor_cypher(cypher, bin_string)}
-#   new_bin_strings.map!{|string| HEX.from_bin(string)}
-#   new_bin_strings[-1]
-#   p new_bin_strings[-1].gsub(/../, HEX_TO_TEXT)
-
-
-
-
 
 HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']]).to_h

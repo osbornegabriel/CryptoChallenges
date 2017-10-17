@@ -18,14 +18,9 @@ require_relative 'challenge-3'
 =end
 
 hex_string = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
-p bin_string = HEX.to_bin(hex_string)
 
-p pairings = count_values(2, hex_string)
-p keys = pairings.keys
-cyphers = find_cyphers(hex_string)
+potential_hex_strings = translations(hex_string)
 
-new_bin_strings = []
-cyphers.each{|cypher| new_bin_strings << xor_cypher(cypher, bin_string)}
-new_bin_strings.map!{|string| HEX.from_bin(string)}
-new_bin_strings[-1]
-p new_bin_strings[-1].gsub(/../, HEX_TO_TEXT)
+p top_translation(potential_hex_strings)
+
+# => "Cooking MCs like a pound of bacon"
