@@ -1,5 +1,5 @@
 class Decoder
-  attr_accessor :bin_rep_length, :from_bin, :to_bin
+  attr_accessor :from_bin, :to_bin
 
   def initialize(bin_rep_length, values_table)
     @bin_rep_length = bin_rep_length
@@ -17,8 +17,8 @@ class Decoder
     end
     bit_vals.reverse
   end
-  # ^ formerly hard-coded as: [128,64,32,16,8,4,2,1].last(@bin_rep_length)
-  # Is hard-coded better because it's faster?
+  # ^ formerly hard-coded as: [256, 128,64,32,16,8,4,2,1].last(@bin_rep_length)
+  # Would hard-coded be better because it's faster?
 
   def create_to_base10(table)
     base10_vals = Array(0..table.length)
