@@ -22,16 +22,10 @@ p bin_string = HEX.to_bin(hex_string)
 
 p pairings = count_values(2, hex_string)
 p keys = pairings.keys
-cyphers = keys.map do |key|
-  cypher = find_xor(key)
-end
+cyphers = find_cyphers(hex_string)
+
 new_bin_strings = []
 cyphers.each{|cypher| new_bin_strings << xor_cypher(cypher, bin_string)}
 new_bin_strings.map!{|string| HEX.from_bin(string)}
-p new_bin_strings[-1]
+new_bin_strings[-1]
 p new_bin_strings[-1].gsub(/../, HEX_TO_TEXT)
-
-
-# cypher = p find_xor(last_key)
-# p new_bin_string = xor_cypher(cypher, bin_string)
-# p HEX.from_bin(new_bin_string)
