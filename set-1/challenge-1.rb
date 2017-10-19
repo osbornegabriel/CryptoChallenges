@@ -20,6 +20,15 @@ class Decoder
   # ^ formerly hard-coded as: [256, 128,64,32,16,8,4,2,1].last(@bin_rep_length)
   # Would hard-coded be better because it's faster?
 
+  def convert_to_base10(num_string)
+    num_chars = num_string.chars
+    num_chars.map!{|char| @to_base10[char]}
+  end
+
+  def convert_from_base10(base10_vals)
+    base10_vals.map!{|integer| @from_base10[integer]}
+  end
+
   def create_to_base10(table)
     base10_vals = Array(0..table.length)
     table.zip(base10_vals).to_h
@@ -52,15 +61,13 @@ class Decoder
   def from_bin(num_string)
     bin_vals = num_string.scan(eval("/.{#{@bin_rep_length}}/"))
     base10_vals = bin_vals.map{|bin_val| from_bits(bin_val)}
-    base10_vals.map!{|integer| @from_base10[integer]}
-    base10_vals.join
+    convert_from_base10(base10_vals).join
   end
 
   def to_bin(num_string)
-    num_chars = num_string.chars
-    num_chars.map!{|char| @to_base10[char]}
-    num_chars.map!{|char| to_bits(char)}
-    num_chars.join
+    digits = convert_to_base10(num_string)
+    digits.map!{|char| to_bits(char)}
+    digits.join
   end
 end
 
