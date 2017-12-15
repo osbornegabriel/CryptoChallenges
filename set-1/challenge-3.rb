@@ -55,3 +55,5 @@ end
 
 
 HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']] + [['27', "'"]]).to_h
+
+TEXT_TO_HEX = HEX_TO_TEXT.invert
