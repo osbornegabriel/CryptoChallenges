@@ -53,5 +53,9 @@ def xor_cypher(cypher, bin_string)
   binary_sets.join
 end
 
+HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']] + [['27', "'"]] + [['2c', ","]] + [['0a', "\n"]] ).to_h
 
-HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']]).to_h
+# + [['0a', '\n']]
+# HEX_TO_TEXT = ((65..90).to_a.map{|v| v.to_s(16)}.zip('A'..'Z') + (97..122).to_a.map{|v| v.to_s(16)}.zip('a'..'z') + [['20', ' ']] + [['27', "'"]]).to_h
+
+TEXT_TO_HEX = HEX_TO_TEXT.invert

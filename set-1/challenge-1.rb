@@ -1,6 +1,9 @@
 class Decoder
   attr_accessor :from_bin, :to_bin
 
+  #Upon intialization, sets the number of bits represented by the base system with bin_rep_length
+  # set_bit_vals is for later easy conversion between binary and base 10
+  # the to_base10 and from_base10 tables are hashes for conversion between the Decoder's base system and base10
   def initialize(bin_rep_length, values_table)
     @bin_rep_length = bin_rep_length
     @bit_vals = set_bit_vals
@@ -20,6 +23,15 @@ class Decoder
   # ^ formerly hard-coded as: [256, 128,64,32,16,8,4,2,1].last(@bin_rep_length)
   # Would hard-coded be better because it's faster?
 
+  def convert_to_base10(num_string)
+    num_chars = num_string.chars
+    num_chars.map!{|char| @to_base10[char]}
+  end
+
+  def convert_from_base10(base10_vals)
+    base10_vals.map!{|integer| @from_base10[integer]}
+  end
+
   def create_to_base10(table)
     base10_vals = Array(0..table.length)
     table.zip(base10_vals).to_h
@@ -29,6 +41,7 @@ class Decoder
     @to_base10.invert
   end
 
+  #Converts base 10 number to its binary representation
   def to_bits(base10_num)
     bits = @bit_vals.map do |b|
       if base10_num >= b
@@ -41,6 +54,7 @@ class Decoder
     bits.join
   end
 
+  #Converts binary number to its base 10 representation
   def from_bits(bin_num)
     base10_value = 0
     @bit_vals.each_with_index do |val,i|
@@ -49,18 +63,18 @@ class Decoder
     base10_value
   end
 
+  # Takes binary string and converts it to an array of base10 values corresponding to the Decoder's bit-representational-length
   def from_bin(num_string)
     bin_vals = num_string.scan(eval("/.{#{@bin_rep_length}}/"))
     base10_vals = bin_vals.map{|bin_val| from_bits(bin_val)}
-    base10_vals.map!{|integer| @from_base10[integer]}
-    base10_vals.join
+    convert_from_base10(base10_vals).join
   end
 
+  # Takes a collection of base10 values, converts each to binary strings, and than combines them into a long string of binary digits
   def to_bin(num_string)
-    num_chars = num_string.chars
-    num_chars.map!{|char| @to_base10[char]}
-    num_chars.map!{|char| to_bits(char)}
-    num_chars.join
+    digits = convert_to_base10(num_string)
+    digits.map!{|char| to_bits(char)}
+    digits.join
   end
 end
 
