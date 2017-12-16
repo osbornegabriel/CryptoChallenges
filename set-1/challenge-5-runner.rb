@@ -19,25 +19,16 @@ require_relative 'challenge-5'
 
 =end
 
-line_one = "Burning 'em, if you ain't quick and nimble
-  I go crazy when I hear a cymbal"
+line_one = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
 key = "ICE"
 
-# p key
-# p key.length
-# p ascii_to_binary(key)
-# p ascii_to_binary(key).size
-
-# p line_one
-# p line_one.length
-# p ascii_to_binary(line_one)
 p HEX.from_bin(sequential_xor(key, line_one))
-p HEX.from_bin(sequential_xor(key, line_one)) ==
-"0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272
+p HEX.from_bin(sequential_xor(key, line_one)) == "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272
   a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"
 
-p BASE10_TO_ASCII
+# "0b363727 2a2b2e63 622c2e69 692a2369 3a2a3c63 24202d62 3d63343c 2a262263 24272765 272a282b 2f20430a 652e2c65 2a312433 3a653e2b 2027630c 692b2028 31652863 26302e27 282f"
 
-# "0b363727 2a2b2e63 622c2e6 5202565302c3069222c27643169323020202e69222b2d632b202e27
 
-"0b363727 2a2b2e63 622c2e65 20256530 2c3069222c27643169323020202e69222b2d632b202e27252665690a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"
+  # It should come out to:
+
+  # "0b363727 2a2b2e63 622c2e69 692a2369 3a2a3c63 24202d62 3d63343c 2a262263 24272765 272a282b 2f20430a 652e2c65 2a312433 3a653e2b 2027630c 692b2028 31652863 26302e27 282f"

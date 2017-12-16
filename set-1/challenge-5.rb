@@ -1,6 +1,6 @@
 require_relative 'challenge-4'
 
-BASE10_TO_ASCII = ((65..90).to_a.zip('A'..'Z') + (97..122).zip('a'..'z') + [[20, ' ']] + [[96, "'"]]).to_h
+BASE10_TO_ASCII = ((65..90).to_a.zip('A'..'Z') + (97..122).zip('a'..'z') + [[20, ' ']] + [[96, "'"]] + [[44, ',']]).to_h
 
 def ascii_to_binary(string)
   hex_string = convert_text_to_hex(string)
