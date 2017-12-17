@@ -51,3 +51,12 @@ lines[-1] = lines[-1].slice(0, lines[-1].size - 1)
 txt = lines.map!{|line| BASE64.to_bin(line)}.join
 
 p txt
+
+p find_keysize(txt)
+
+line_one = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
+key = "ICE"
+
+old_code = sequential_xor(key, line_one)
+
+p find_keysize(old_code)

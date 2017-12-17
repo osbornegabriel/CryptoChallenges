@@ -13,14 +13,14 @@ end
 def find_keysize(bin_str)
   most_likely = 0
   distance = bin_str.size
-  40.times do |i|
-    matches = create_scan(i + 1, bin_str)
+  38.times do |i|
+    matches = create_scan(i + 2, bin_str)
     first = matches[0]
     second = matches[1]
-    ham_distance = hamming_distance(first, second)
+    ham_distance = hamming_distance(first, second) / (i + 2)
     if ham_distance < distance
       distance = ham_distance
-      most_likely = i + 1
+      most_likely = i + 2
     end
   end
   most_likely
