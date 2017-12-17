@@ -45,4 +45,9 @@ str_1 = "this is a test"
 str_2 = "wokka wokka!!!"
 p hamming_distance(str_1, str_2)
 
-p create_scan(2, "I am many things")
+lines = parse_txt_file("6.txt")
+
+lines[-1] = lines[-1].slice(0, lines[-1].size - 1)
+txt = lines.map!{|line| BASE64.to_bin(line)}.join
+
+p txt

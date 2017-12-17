@@ -18,7 +18,7 @@ def find_keysize(bin_str)
     first = matches[0]
     second = matches[1]
     ham_distance = hamming_distance(first, second)
-    if ham_distance < distance do
+    if ham_distance < distance
       distance = ham_distance
       most_likely = i + 1
     end
