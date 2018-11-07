@@ -45,18 +45,18 @@ str_1 = "this is a test"
 str_2 = "wokka wokka!!!"
 p hamming_distance(str_1, str_2)
 
-lines = parse_txt_file("6.txt")
+# lines = parse_txt_file("6.txt")
 
-lines[-1] = lines[-1].slice(0, lines[-1].size - 1)
-txt = lines.map!{|line| BASE64.to_bin(line)}.join
+# lines[-1] = lines[-1].slice(0, lines[-1].size - 1)
+# txt = lines.map!{|line| BASE64.to_bin(line)}.join
 
-p txt
+# p txt
 
-p find_keysize(txt)
+# p find_keysize(txt)
 
-line_one = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
-key = "ICE"
+# line_one = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
+# key = "ICE"
 
-old_code = sequential_xor(key, line_one)
+# old_code = sequential_xor(key, line_one)
 
-p find_keysize(old_code)
+# p find_keysize(old_code)
